@@ -1,10 +1,13 @@
 server:
   port: 7001
 eureka:
+  server:
+    enable-self-preservation: true  # false 关闭自我保护机制
   instance:
-    hostname: localhost
+    hostname: eureka7001.com
   client:
     register-with-eureka: false #不向注册中心注册自己
     fetch-registry: false #false表示自己端就是注册中心，我的职责就是维护实例，不需要检索服务
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/  #设置于eureka Server交互地址查询服务和注册地址
+      #设置于eureka Server交互地址查询服务和注册地址 单机版 http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
