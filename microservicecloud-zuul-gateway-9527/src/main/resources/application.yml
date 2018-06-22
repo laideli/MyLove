@@ -1,0 +1,28 @@
+server:
+  port:  9527 #访问地址显示ip
+
+spring:
+  application:
+    name: microserivcecloud-zuul-gateway
+eureka:
+  client:                      # 客户端注册eureka服务列表
+    service-url:
+      #单机版注册地址 http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+    hostname: myzuul.com
+
+info:
+  app.name: wangfang-microservicecloud
+  company.name: www.wangfang.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+
+zuul:
+  routes:
+    mydept.serviceId: microservicecloud-dept
+    mydept.path:  /mydept/**                 #映射服务地址
+  ignored-services: "*"  #忽略真实服务
+  prefix: /wangfang
